@@ -15,35 +15,6 @@ import java.util.*;
 
 public class ExecuteConverter {
 
-	public static void main(String[] args) throws Exception {
-
-		//String srcFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources.bson";
-		//String tgtFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources2.bson";
-		String srcFilePath="";
-		String tgtFilePath="";
-
-		if (args[0].equalsIgnoreCase("-src") && args[2].equalsIgnoreCase("-tgt"))
-		{
-			srcFilePath = args[1];
-			tgtFilePath = args[3];
-		}
-
-		if (!srcFilePath.isEmpty() && !tgtFilePath.isEmpty())
-		{
-			ExecuteConverter converter = new ExecuteConverter();
-			try
-			{
-				converter.execute(srcFilePath,tgtFilePath);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}else
-		{
-			System.out.println("Arguments: -src {srcFilepath} -tgt {tgtFilePath}");
-		}
-	}
-
-
 	public ExecuteConverter()
 	{
 		 this.srcParser = new FhirContext(FhirVersionEnum.DSTU2_HL7ORG).newJsonParser();
@@ -51,7 +22,7 @@ public class ExecuteConverter {
 		 this.converter = new VersionConvertor_10_30(new NullVersionConverterAdvisor30());
 		 this.bsonHelper = new BsonHelper();
 		 this.jsonParser = new JsonParser();
-		 this.notConvertedResources = Arrays.asList("BodySite","ClaimResponse","PaymentReconciliation", "DiagnosticOrder",
+		 this.notConvertedResources = Arrays.asList("BodySite","ClaimResponse","DiagnosticOrder",
 			 "Goal", "NutritionOrder","PaymentResponse");
 		 this.mongoFiled = Arrays.asList("@method","@REFERENCE","@typename","@VersionId","@when","@state","_id","@MultiKey");
 	}
