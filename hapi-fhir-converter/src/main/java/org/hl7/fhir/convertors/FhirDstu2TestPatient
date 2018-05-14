@@ -1,142 +1,65 @@
 {
-                "resourceType": "AllergyIntolerance",
-                "id": "MD1",
-                "meta": {
-                    "versionId": "MD1",
-                    "lastUpdated": "2017-10-08T23:32:35.841+00:00"
-                },
-                "text": {
-                    "fhir_comments": [
-                        "   an identifier used for this Adverse Reaction Risk   "
-                    ],
-                    "status": "generated",
-                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\r\n  <p xmlns=\"\">\r\n    <b>Generated Narrative with Details</b>\r\n  </p>\r\n  <p xmlns=\"\">\r\n    <b>id</b>: example</p>\r\n  <p xmlns=\"\">\r\n    <b>identifier</b>: 49476534</p>\r\n  <p xmlns=\"\">\r\n    <b>recordedDate</b>: 09/10/2014 2:58:00 PM</p>\r\n  <p xmlns=\"\">\r\n    <b>recorder</b>: <a>Practitioner/example</a></p>\r\n  <p xmlns=\"\">\r\n    <b>patient</b>: <a>Patient/example</a></p>\r\n  <p xmlns=\"\">\r\n    <b>substance</b>: Cashew nuts <span>(Details : {SNOMED CT code '227493005' = '227493005', given as 'Cashew nuts'})</span></p>\r\n  <p xmlns=\"\">\r\n    <b>status</b>: confirmed</p>\r\n  <p xmlns=\"\">\r\n    <b>criticality</b>: CRITH</p>\r\n  <p xmlns=\"\">\r\n    <b>type</b>: allergy</p>\r\n  <p xmlns=\"\">\r\n    <b>category</b>: food</p>\r\n  <p xmlns=\"\">\r\n    <b>lastOccurence</b>: 01/06/2012</p>\r\n  <blockquote xmlns=\"\">\r\n    <p>\r\n      <b>reaction</b>\r\n    </p>\r\n    <p>\r\n      <b>substance</b>: cashew nut allergenic extract Injectable Product <span>(Details : {RxNorm code 'C3214954' = '??', given as 'cashew nut allergenic extract Injectable Product'})</span></p>\r\n    <p>\r\n      <b>manifestation</b>: Anaphylactic reaction <span>(Details : {SNOMED CT code '39579001' = '39579001', given as 'Anaphylactic reaction'})</span></p>\r\n    <p>\r\n      <b>description</b>: Challenge Protocol. Severe Reaction to 1/8 cashew. Epinephrine administered</p>\r\n    <p>\r\n      <b>onset</b>: 12/06/2012</p>\r\n    <p>\r\n      <b>severity</b>: severe</p>\r\n  </blockquote>\r\n  <blockquote xmlns=\"\">\r\n    <p>\r\n      <b>reaction</b>\r\n    </p>\r\n    <p>\r\n      <b>certainty</b>: likely</p>\r\n    <p>\r\n      <b>manifestation</b>: Urticaria <span>(Details : {SNOMED CT code '64305001' = '64305001', given as 'Urticaria'})</span></p>\r\n    <p>\r\n      <b>onset</b>: 01/01/2004</p>\r\n    <p>\r\n      <b>severity</b>: moderate</p>\r\n  </blockquote>\r\n</div>"
-                },
-                "identifier": [
-                    {
-                        "system": "http://acme.com/ids/patients/risks",
-                        "value": "49476534"
-                    },
-                    {
-                        "system": "http://medicaldirector.com/hub/identifier/tenant-id",
-                        "value": "hub02.helix.medicaldirector.com"
-                    },
-                    {
-                        "system": "http://medicaldirector.com/hub/identifier/app-id",
-                        "value": "77699511-0600-4ecc-8097-bf4d93998349"
-                    },
-                    {
-                        "system": "http://medicaldirector.com/hub/identifier/external/resource/object-id",
-                        "value": "1"
-                    }
-                ],
-                "recordedDate": "2014-10-09T14:58:00+11:00",
-                "_recordedDate": {
-                    "fhir_comments": [
-                        "   the date that this entry was recorded   "
-                    ]
-                },
-                "recorder": {
-                    "fhir_comments": [
-                        "   who made the record / last updated it   "
-                    ],
-                    "reference": "https://test-api.hub.medicaldirector.com/fhir/Practitioner/example"
-                },
-                "patient": {
-                    "fhir_comments": [
-                        "   the patient that actually has the risk of adverse reaction   "
-                    ],
-                    "reference": "https://test-api.hub.medicaldirector.com/fhir/Patient/example"
-                },
-                "substance": {
-                    "fhir_comments": [
-                        "   subtance - either coded, or text. A few times, \n    there's a full description of a complex substance - in these caes, use the\n    extension [url] to refer to a Substance resource   "
-                    ],
-                    "coding": [
-                        {
-                            "system": "http://snomed.info/sct",
-                            "code": "227493005",
-                            "display": "Cashew nuts"
-                        }
-                    ]
-                },
-                "status": "confirmed",
-                "_status": {
-                    "fhir_comments": [
-                        "   this individual has had several reactions, and there is no \n    question that the allergy is real and serious   "
-                    ]
-                },
-                "criticality": "CRITH",
-                "type": "allergy",
-                "_type": {
-                    "fhir_comments": [
-                        "   note: it's often unknown whether an allergy is mediated by an immune response, and not as significant as once thought   "
-                    ]
-                },
-                "category": "food",
-                "_category": {
-                    "fhir_comments": [
-                        "   this categorisation is implied by \"cashew nut\" and therefore basically \n    redundant, but many systems collect this field anyway, since it's either \n    useful when the substance is not coded, or it's quicker to sort/filter on\n    than using terminology based reasoning   "
-                    ]
-                },
-                "lastOccurence": "2012-06",
-                "_lastOccurence": {
-                    "fhir_comments": [
-                        "   last happened June 2012. Typically, systems either track lastOccurence,\n     or a list of events.   "
-                    ]
-                },
-                "reaction": [
-                    {
-                        "fhir_comments": [
-                            "   past events. There's no claim that this is all the events, and \n     that should not be assumed   "
-                        ],
-                        "substance": {
-                            "fhir_comments": [
-                                "   \n      It's possible to list specific things to which the patient responded,\n      e.g. chocolate (that happened to contain cashew nuts). This event has\n      such a specific substance. Note that systems should ensure that what\n      goes in here does not conflict with the substance above, and systems\n      processing the data can be sure that what is here does not contravene\n      the substance above\n      "
-                            ],
-                            "coding": [
-                                {
-                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
-                                    "code": "C3214954",
-                                    "display": "cashew nut allergenic extract Injectable Product"
-                                }
-                            ]
-                        },
-                        "manifestation": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "http://snomed.info/sct",
-                                        "code": "39579001",
-                                        "display": "Anaphylactic reaction"
-                                    }
-                                ]
-                            }
-                        ],
-                        "description": "Challenge Protocol. Severe Reaction to 1/8 cashew. Epinephrine administered",
-                        "onset": "2012-06-12",
-                        "severity": "severe"
-                    },
-                    {
-                        "certainty": "likely",
-                        "_certainty": {
-                            "fhir_comments": [
-                                "   this was the first occurrence   "
-                            ]
-                        },
-                        "manifestation": [
-                            {
-                                "coding": [
-                                    {
-                                        "system": "http://snomed.info/sct",
-                                        "code": "64305001",
-                                        "display": "Urticaria"
-                                    }
-                                ]
-                            }
-                        ],
-                        "onset": "2004",
-                        "severity": "moderate"
-                    }
-                ]
+    "_id" : "PaymentReconciliation/MD1/_history/MD2",
+    "resourceType" : "PaymentReconciliation",
+    "id" : "MD1",
+    "meta" : {
+        "versionId" : "MD2",
+        "lastUpdated" : "2018-04-18T22:22:40.326+00:00"
+    },
+    "identifier" : [
+        {
+            "system" : "http://medicaldirector.com/hub/identifier/external/resource/object-id",
+            "value" : "0b5d257b-18b1-d408-5cf0-d3b79aac3c24"
+        },
+        {
+            "system" : "http://medicaldirector.com/hub/identifier/app-id",
+            "value" : "77699511-0600-4ecc-8097-bf4d93998349"
+        },
+        {
+            "system" : "http://medicaldirector.com/hub/identifier/tenant-id",
+            "value" : "vvg22.helix.medicaldirector.com"
+        },
+        {
+            "system" : "http://medicaldirector.com/identifier/billing/hub-transaction-id",
+            "value" : "4fa3b264-ff6f-4c44-bfa5-ef2b7242f533"
+        },
+        {
+            "system" : "http://medicaldirector.com/identifier/billing/transactionreference",
+            "value" : "207199"
+        }
+    ],
+    "outcome" : "error",
+    "created" : "04/18/2018 22:22:08",
+    "detail" : [
+        {
+            "type" : {
+                "system" : "http://medicaldirector.com/fhir/Valueset/payment-type-code",
+                "code" : "eft-payment"
+            },
+            "request" : {
+                "reference" : "Claim/MD1",
+                "display" : ""
+            },
+            "date" : "2018-04-19T08:22:03+10:00",
+            "amount" : {
+                "value" : 100.01
             }
+        }
+    ],
+    "note" : [
+        {
+            "type" : {
+                "system" : "http://hl7.org/fhir/note-type",
+                "code" : "display"
+            },
+            "text" : "{\"result\":\"DECLINED\",\"transactionId\":\"4fa3b264-ff6f-4c44-bfa5-ef2b7242f533\",\"transactionReference\":\"207199\",\"issuerActionCode\":\"01\",\"elidedPan\":\"XXXXXXXXXXXXX9660\",\"rrn\":\"0419207199\",\"surchargeAmount\":\"0.00\",\"baseAmount\":\"100.01\",\"transactionAmount\":\"100.01\",\"postbackUrl\":\"https://vvg22.helix.medicaldirector.com/api/PaymentClaim/Response?id=0b5d257b-18b1-d408-5cf0-d3b79aac3c24\",\"hubTransactionId\":\"4fa3b264-ff6f-4c44-bfa5-ef2b7242f533\"}"
+        }
+    ],
+    "@method" : 2,
+    "@REFERENCE" : "PaymentReconciliation/MD1",
+    "@typename" : "PaymentReconciliation",
+    "@VersionId" : "MD2",
+    "@when" : ISODate("2018-04-18T22:22:40.326Z"),
+    "@state" : "current",
+    "@MultiKey" : "PaymentReconciliation/77699511-0600-4ecc-8097-bf4d93998349/vvg22.helix.medicaldirector.com/0b5d257b-18b1-d408-5cf0-d3b79aac3c24"
+}

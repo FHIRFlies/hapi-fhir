@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: ca.uhn.hapi.fhir:hapi-fhir-validation-resources-r4:3.2.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/hapi-fhir-validation-resources-r4/3.2.0-SNAPSHOT/hapi-fhir-validation-resources-r4-3.2.0-20180113.074650-8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/hapi-fhir-validation-resources-r4/3.2.0-SNAPSHOT/hapi-fhir-validation-resources-r4-3.2.0-20180113.074650-8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/hapi-fhir-validation-resources-r4/3.2.0-SNAPSHOT/hapi-fhir-validation-resources-r4-3.2.0-20180113.074650-8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

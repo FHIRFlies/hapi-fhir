@@ -17,8 +17,11 @@ public class ExecuteConverter {
 
 	public static void main(String[] args) throws Exception {
 
-		String srcFilePath = "";
-		String tgtFilePath = "";
+		//String srcFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources.bson";
+		//String tgtFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources2.bson";
+		String srcFilePath="";
+		String tgtFilePath="";
+
 		if (args[0].equalsIgnoreCase("-src") && args[2].equalsIgnoreCase("-tgt"))
 		{
 			srcFilePath = args[1];
@@ -48,9 +51,9 @@ public class ExecuteConverter {
 		 this.converter = new VersionConvertor_10_30(new NullVersionConverterAdvisor30());
 		 this.bsonHelper = new BsonHelper();
 		 this.jsonParser = new JsonParser();
-		 this.notConvertedResources = Arrays.asList("AllergyIntolerance", "BodySite", "Claim", "ClaimResponse", "DiagnosticOrder",
-			 "Goal", "MedicationOrder", "NutritionOrder", "PaymentReconciliation", "PaymentResponse","Observation");
-		 this.mongoFiled = Arrays.asList("@method","@REFERENCE","@typename","@VersionId","@when","@state","_id");
+		 this.notConvertedResources = Arrays.asList("BodySite","ClaimResponse","PaymentReconciliation", "DiagnosticOrder",
+			 "Goal", "NutritionOrder","PaymentResponse");
+		 this.mongoFiled = Arrays.asList("@method","@REFERENCE","@typename","@VersionId","@when","@state","_id","@MultiKey");
 	}
 	private BsonHelper bsonHelper;
 	private List<String> notConvertedResources;
@@ -78,33 +81,13 @@ public class ExecuteConverter {
 			{
 				continue;
 			}
-//			JsonElement method = jsonObject.get("@method");
-			//			JsonElement reference = jsonObject.get("@REFERENCE");
-			//			JsonElement typename = jsonObject.get("@typename");
-			//			JsonElement VersionId = jsonObject.get("@VersionId");
-			//			JsonElement when = jsonObject.get("@when");
-			//			JsonElement state = jsonObject.get("@state");
-			//			JsonElement _id = jsonObject.get("_id");
-
-//			jsonObject.remove("@method");
-//			jsonObject.remove("@REFERENCE");
-//			jsonObject.remove("@typename");
-//			jsonObject.remove("@VersionId");
-//			jsonObject.remove("@when");
-//			jsonObject.remove("@state");
-//			jsonObject.remove("_id");
+			System.out.println(jsonObject.get(RESOURCETYPE));
 			Map<String,JsonElement> mongoProperties = GetMongoFields(jsonObject,this.mongoFiled);
 			RemoveMongoFields(jsonObject,this.mongoFiled);
 			String resultResourceJson = this.convert(this.converter,this.srcParser,this.tgtParser,jsonObject.toString());
 			JsonObject resultJsonObject = new JsonParser().parse(resultResourceJson).getAsJsonObject();
 			resultJsonObject = AddMongoFields(resultJsonObject,mongoProperties);
-//			resultJsonObject.add("@method",method);
-//			resultJsonObject.add("@REFERENCE",reference);
-//			resultJsonObject.add("@typename",typename);
-//			resultJsonObject.add("@VersionId",VersionId);
-//			resultJsonObject.add("@when",when);
-//			resultJsonObject.add("@state",state);
-//			resultJsonObject.add("_id",_id);
+
 			BSONObject bsonDocument = (BSONObject) JSON.parse(resultJsonObject.toString());
 			results.add(bsonDocument);
 		}
@@ -135,7 +118,10 @@ public class ExecuteConverter {
 	private static JsonObject AddMongoFields(JsonObject jsonObject,Map<String,JsonElement> fields)
 	{
 		for (Map.Entry<String,JsonElement> entry: fields.entrySet()) {
-			jsonObject.add(entry.getKey(),entry.getValue());
+			if (entry.getValue()!=null)
+			{
+				jsonObject.add(entry.getKey(),entry.getValue());
+			}
 		}
 		return jsonObject;
 	}
