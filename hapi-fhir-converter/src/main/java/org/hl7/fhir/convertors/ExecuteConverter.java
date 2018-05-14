@@ -9,6 +9,7 @@ import com.google.gson.JsonParser;
 import com.mongodb.util.JSON;
 import org.bson.BSONObject;
 import org.hl7.fhir.exceptions.FHIRException;
+import org.hl7.fhir.instance.model.DateTimeType;
 import org.hl7.fhir.instance.model.Resource;
 
 import java.util.*;
@@ -55,6 +56,16 @@ public class ExecuteConverter {
 			System.out.println(jsonObject.get(RESOURCETYPE));
 			Map<String,JsonElement> mongoProperties = GetMongoFields(jsonObject,this.mongoFiled);
 			RemoveMongoFields(jsonObject,this.mongoFiled);
+			if (jsonObject.get(RESOURCETYPE).getAsString().equalsIgnoreCase("PaymentReconciliation"))
+			{
+				if (jsonObject.has("created"))
+				{
+					String paymentReconCreatedTime = jsonObject.get("created").getAsString();
+					DateTimeType createdTime = new DateTimeType(new Date(paymentReconCreatedTime));
+					jsonObject.remove("created");
+					jsonObject.addProperty("created",createdTime.asStringValue());
+				}
+			}
 			String resultResourceJson = this.convert(this.converter,this.srcParser,this.tgtParser,jsonObject.toString());
 			JsonObject resultJsonObject = new JsonParser().parse(resultResourceJson).getAsJsonObject();
 			resultJsonObject = AddMongoFields(resultJsonObject,mongoProperties);
