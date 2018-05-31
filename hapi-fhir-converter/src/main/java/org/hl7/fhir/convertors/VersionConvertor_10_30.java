@@ -8498,6 +8498,15 @@ public class VersionConvertor_10_30 {
       return null;
     org.hl7.fhir.dstu3.model.MedicationRequest.MedicationRequestSubstitutionComponent tgt = new org.hl7.fhir.dstu3.model.MedicationRequest.MedicationRequestSubstitutionComponent();
     copyElement(src, tgt);
+
+    String value = src.getType().getCoding().get(0).getCode();
+
+    if (value.equalsIgnoreCase("E")) {
+        tgt.setAllowed(true);
+    }else
+    {
+        tgt.setAllowed(false);
+    }
     tgt.setReason(convertCodeableConcept(src.getReason()));
     return tgt;
   }

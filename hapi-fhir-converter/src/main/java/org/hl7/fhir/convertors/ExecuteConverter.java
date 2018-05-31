@@ -70,6 +70,8 @@ public class ExecuteConverter {
 			JsonObject resultJsonObject = new JsonParser().parse(resultResourceJson).getAsJsonObject();
 			resultJsonObject = AddMongoFields(resultJsonObject,mongoProperties);
 
+			System.out.println(resultJsonObject.toString());
+
 			BSONObject bsonDocument = (BSONObject) JSON.parse(resultJsonObject.toString());
 			results.add(bsonDocument);
 		}
