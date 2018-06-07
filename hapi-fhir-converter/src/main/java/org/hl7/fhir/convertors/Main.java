@@ -2,8 +2,8 @@ package org.hl7.fhir.convertors;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        //String srcFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources.bson";
-        //String tgtFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources2.bson";
+//        String srcFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources.bson";
+//        String tgtFilePath = "C:\\Work\\Repos\\hapi-fhir\\hapi-fhir-converter\\target\\resources2.bson";
         String srcFilePath="";
         String tgtFilePath="";
 

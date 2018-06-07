@@ -10,6 +10,7 @@ import com.mongodb.util.JSON;
 import org.bson.BSONObject;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.instance.model.DateTimeType;
+import org.hl7.fhir.instance.model.DateType;
 import org.hl7.fhir.instance.model.Resource;
 
 import java.util.*;
@@ -66,17 +67,58 @@ public class ExecuteConverter {
 					jsonObject.addProperty("created",createdTime.asStringValue());
 				}
 			}
-			String resultResourceJson = this.convert(this.converter,this.srcParser,this.tgtParser,jsonObject.toString());
-			JsonObject resultJsonObject = new JsonParser().parse(resultResourceJson).getAsJsonObject();
-			resultJsonObject = AddMongoFields(resultJsonObject,mongoProperties);
+            if (jsonObject.get(RESOURCETYPE).getAsString().equalsIgnoreCase("Patient"))
+            {
+                if (jsonObject.has("birthDate"))
+                {
+                    String birthdatetime = jsonObject.get("birthDate").getAsString();
+                    DateType birthDate = new DateType(birthdatetime);
+                    jsonObject.remove("birthDate");
+                    jsonObject.addProperty("birtheDate",birthDate.asStringValue());
+                }
+            }
 
-			System.out.println(resultJsonObject.toString());
+            if (jsonObject.get(RESOURCETYPE).getAsString().equalsIgnoreCase("Observation")) {
+                if (jsonObject.has("category")) {
 
-			BSONObject bsonDocument = (BSONObject) JSON.parse(resultJsonObject.toString());
-			results.add(bsonDocument);
+                    if(jsonObject.get("category").getAsJsonObject().has("text"))
+                    {
+                        if(jsonObject.get("category").getAsJsonObject().get("text").getAsString().equalsIgnoreCase("Social History"))
+                        {
+                            if(jsonObject.has("component"))
+                            {
+                                for (JsonElement component :
+                                        jsonObject.get("component").getAsJsonArray()) {
+
+                                    if (component.getAsJsonObject().has("valueDateTime")) {
+                                        String valueDateTimeString = component.getAsJsonObject().get("valueDateTime").getAsString();
+                                        component.getAsJsonObject().remove("valueDateTime");
+                                        component.getAsJsonObject().addProperty("valueString", valueDateTimeString);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+			}
+            String resultResourceJson = this.convert(this.converter,this.srcParser,this.tgtParser,jsonObject.toString());
+            JsonObject resultJsonObject = new JsonParser().parse(resultResourceJson).getAsJsonObject();
+            resultJsonObject = AddMongoFields(resultJsonObject,mongoProperties);
+
+            System.out.println(resultJsonObject.toString());
+
+            BSONObject bsonDocument = (BSONObject) JSON.parse(resultJsonObject.toString());
+            results.add(bsonDocument);
+
+            if(results.size() > 1000)
+            {
+                bsonHelper.Write(tgtFilePath,results);
+                results = new ArrayList<BSONObject>();
+            }
 		}
 
-		bsonHelper.Write(tgtFilePath,results);
+
 	}
 
 	private static Map<String,JsonElement> GetMongoFields(JsonObject jsonObject,List<String> fields)
