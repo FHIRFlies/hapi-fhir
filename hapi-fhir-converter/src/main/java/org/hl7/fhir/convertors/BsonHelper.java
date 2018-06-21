@@ -33,6 +33,7 @@ public class BsonHelper {
 			try {
 				inputStream.close();
 			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		System.err.println(String.format("%s objects read", count));
@@ -59,6 +60,7 @@ public class BsonHelper {
 			try {
 				outputStream.close();
 			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		System.out.println("Result written to Bson File");

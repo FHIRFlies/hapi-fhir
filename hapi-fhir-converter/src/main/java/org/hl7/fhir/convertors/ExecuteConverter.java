@@ -46,7 +46,7 @@ public class ExecuteConverter {
 
 		for (String s: resultJson
 			) {
-			System.out.println(s);
+			//System.out.println(s);
 
 			JsonObject jsonObject =jsonParser.parse(s).getAsJsonObject();
 
@@ -54,7 +54,7 @@ public class ExecuteConverter {
 			{
 				continue;
 			}
-			System.out.println(jsonObject.get(RESOURCETYPE));
+			//System.out.println(jsonObject.get(RESOURCETYPE));
 			Map<String,JsonElement> mongoProperties = GetMongoFields(jsonObject,this.mongoFiled);
 			RemoveMongoFields(jsonObject,this.mongoFiled);
 			if (jsonObject.get(RESOURCETYPE).getAsString().equalsIgnoreCase("PaymentReconciliation"))
@@ -106,18 +106,20 @@ public class ExecuteConverter {
             JsonObject resultJsonObject = new JsonParser().parse(resultResourceJson).getAsJsonObject();
             resultJsonObject = AddMongoFields(resultJsonObject,mongoProperties);
 
-            System.out.println(resultJsonObject.toString());
+            //System.out.println(resultJsonObject.toString());
 
             BSONObject bsonDocument = (BSONObject) JSON.parse(resultJsonObject.toString());
             results.add(bsonDocument);
-
             if(results.size() > 1000)
             {
                 bsonHelper.Write(tgtFilePath,results);
                 results = new ArrayList<BSONObject>();
             }
 		}
-
+		if (results.size() >0)
+		{
+			bsonHelper.Write(tgtFilePath,results);
+		}
 
 	}
 
